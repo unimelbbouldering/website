@@ -20,7 +20,7 @@ const pageVariants = {
 function Wordmark() {
   return (
     <Link to={to("")} className="flex items-center gap-2 text-base font-extrabold tracking-tight whitespace-nowrap sm:text-lg">
-      <Hold color="var(--tape-yellow)" className="size-7" />
+      <Hold color="var(--tape-blue)" className="size-7" />
       UniMelb Bouldering
     </Link>
   )
