@@ -8,8 +8,8 @@ import { EventCarousel } from "@/components/shared/EventCarousel"
 import { ImageSlot } from "@/components/shared/ImageSlot"
 import { upcoming, useEventFilter } from "@/components/shared/useEventFilter"
 import {
-  about, club, committee, eventTypes, faqs, formatDate, joinSteps, memberPerks, sponsors, teams,
-  type ClubEvent, type CommitteeMember, type HoldType, type Team,
+  about, club, committee, eventTypes, faqs, formatDate, heroImage, joinSteps, memberPerks, sponsors, teams,
+  type ClubEvent, type CommitteeMember, type Team,
 } from "@/content/site"
 import { pagePath } from "../registry"
 import { cn } from "@/lib/utils"
@@ -54,47 +54,34 @@ function EventCard({ event }: { event: ClubEvent }) {
 
 /* ---------------------------------- Home --------------------------------- */
 
-const heroHolds: { color: string; type: HoldType; className: string; delay: number }[] = [
-  { color: "var(--tape-pink)", type: "Jug", className: "left-0 top-[4%] size-20", delay: 0.55 },
-  { color: "var(--tape-blue)", type: "Crimp", className: "right-[4%] top-0 size-16", delay: 0.65 },
-  { color: "var(--tape-green)", type: "Sloper", className: "right-0 bottom-[22%] size-24", delay: 0.75 },
-  { color: "var(--tape-purple)", type: "Pinch", className: "left-[10%] bottom-[2%] size-14", delay: 0.85 },
-  { color: "var(--tape-orange)", type: "Pocket", className: "left-[28%] bottom-[14%] size-12", delay: 0.95 },
-]
-
 export function Home() {
   return (
     <>
-      <section className="grid items-center gap-12 pt-8 pb-10 md:grid-cols-[1.1fr_1fr] md:pt-12">
-        <div>
-          <h1 className={cn(heading, "text-[clamp(3rem,8vw,6.5rem)] leading-[0.95]")}>
-            Find your people on the wall.
+      {/* Full-bleed: breaks out of the page container to the window edges. */}
+      <section className="relative mx-[calc(50%-50vw)] h-[max(34rem,min(42vw,calc(100svh-7.5rem)))] overflow-hidden rounded-b-[2.5rem] md:rounded-b-[4rem]">
+        <ImageSlot label={heroImage.alt} src={heroImage.src} contain className="absolute inset-0 size-full" />
+        <div aria-hidden className="absolute inset-0 bg-[#1A1A2E]/55" />
+        <div className="absolute inset-0 flex flex-col items-center justify-end px-5 pb-16 text-center md:pb-24">
+          <h1 className={cn(heading, "max-w-3xl text-[clamp(2rem,4.5vw,4rem)] leading-[0.95] text-balance text-white")}>
+            {club.fullName}
           </h1>
-          <p className="mt-7 max-w-md text-lg text-muted-foreground">{club.intro}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Button asChild size="lg" className="h-12 rounded-full px-6 text-base font-semibold">
-              <Link to={to("join")}>Become a member</Link>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Button
+              asChild
+              size="lg"
+              className="h-12 rounded-full bg-[var(--tape-yellow)] px-6 text-base font-semibold text-[#1A1A2E] hover:bg-[var(--tape-yellow)]/85"
+            >
+              <Link to={to("join")}>Join us</Link>
             </Button>
-            <Button asChild size="lg" variant="secondary" className="h-12 rounded-full px-6 text-base font-semibold">
-              <Link to={to("events")}>See what's on</Link>
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="h-12 rounded-full bg-white px-6 text-base font-semibold text-[#1A1A2E] hover:bg-white/85"
+            >
+              <Link to={to("events")}>See events</Link>
             </Button>
           </div>
-        </div>
-
-        <div className="relative aspect-square">
-          <ImageSlot label="Members climbing" className="absolute inset-[10%_18%_22%_6%] rotate-[-3deg] rounded-3xl" />
-          <ImageSlot label="Club social" className="absolute inset-[48%_4%_4%_42%] rotate-[4deg] rounded-3xl border-4 border-background" />
-          {heroHolds.map((h, i) => (
-            <motion.div
-              key={i}
-              className={cn("absolute", h.className)}
-              initial={{ scale: 0, rotate: -40 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: h.delay, type: "spring", stiffness: 380, damping: 14 }}
-            >
-              <TypedHold type={h.type} color={h.color} className="size-full" />
-            </motion.div>
-          ))}
         </div>
       </section>
 
@@ -267,7 +254,6 @@ export function Committee() {
               <div className="mb-12 flex flex-wrap items-center gap-x-4 gap-y-1">
                 <Hold color={teamColor[t.name]} variant={ti} className="size-9" />
                 <h2 className={cn(heading, "text-3xl")}>{t.name}</h2>
-                <p className="w-full text-muted-foreground sm:w-auto">{t.blurb}</p>
               </div>
               {/* Directors (and the president) take a 2×2 cell; every exec gets a bigger card. */}
               <div className={cn("grid grid-cols-2 gap-x-6 gap-y-14", execs ? "md:grid-cols-4" : "sm:grid-cols-3 md:grid-cols-5")}>

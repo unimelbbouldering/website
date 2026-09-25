@@ -1,8 +1,19 @@
 import { ImageIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Empty image placeholder. Swap for an <img> once photos are ready.
-export function ImageSlot({ label, className }: { label: string; className?: string }) {
+// Renders the photo when `src` is set, otherwise an empty placeholder.
+// `contain` shows the whole photo uncropped, with a blurred copy filling the gaps.
+export function ImageSlot({ label, src, contain, className }: { label: string; src?: string; contain?: boolean; className?: string }) {
+  if (src && contain) {
+    return (
+      <div className={cn("overflow-hidden", className)}>
+        <img src={src} alt="" aria-hidden className="absolute inset-0 size-full scale-110 object-cover blur-2xl" />
+        <img src={src} alt={label} className="relative size-full object-contain" />
+      </div>
+    )
+  }
+  if (src) return <img src={src} alt={label} className={cn("object-cover", className)} />
+
   return (
     <div
       role="img"

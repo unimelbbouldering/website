@@ -31,7 +31,7 @@ export default function ChalkLayout() {
   useDesignRoot("chalk")
 
   return (
-    <div className="min-h-svh">
+    <div className="min-h-svh overflow-x-clip">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:m-3 focus:bg-card focus:p-2">
         Skip to content
       </a>
@@ -77,7 +77,6 @@ export default function ChalkLayout() {
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-8 md:flex-row md:items-start md:justify-between">
           <div className="space-y-1.5">
             <Wordmark />
-            <p className="text-sm text-muted-foreground">An affiliated club of the University of Melbourne Student Union.</p>
           </div>
           <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
             {navPages.map((p) => (
@@ -87,7 +86,6 @@ export default function ChalkLayout() {
             ))}
             <a href={`mailto:${club.email}`} className="text-muted-foreground hover:text-foreground">Email</a>
             <a href={club.instagramUrl} className="text-muted-foreground hover:text-foreground">Instagram</a>
-            <a href={club.discordUrl} className="text-muted-foreground hover:text-foreground">Discord</a>
           </nav>
         </div>
       </footer>

@@ -3,6 +3,7 @@
 
 export const club = {
   name: "UniMelb Bouldering",
+  fullName: "University of Melbourne Bouldering Society",
   shortName: "UMB",
   tagline: "Climb with us, every week, whatever your grade.",
   intro:
@@ -16,6 +17,12 @@ export const club = {
   meetingPoint: "Parkville campus, Union House foyer",
 }
 
+// Home page hero. The photo lives in public/; replace hero.png to change it.
+export const heroImage = {
+  src: "/hero.png",
+  alt: "Club members together at the bouldering gym",
+}
+
 export const stats = [
   { value: "Weekly", label: "social sessions" },
   { value: "V0–V10", label: "every grade welcome" },
@@ -24,7 +31,7 @@ export const stats = [
 
 export type EventType = "Social" | "Beginners" | "Workshop" | "Outdoor" | "Comp"
 
-export const eventTypes: EventType[] = ["Social", "Beginners", "Workshop", "Outdoor", "Comp"]
+export const eventTypes: EventType[] = ["Social", "Comp", "Workshop"]
 
 // Events are expected to come from Instagram posts: a carousel of images plus
 // the caption details. `src` is left empty until real posts are imported.
@@ -132,11 +139,11 @@ export const events: ClubEvent[] = [
 
 export type Team = "Executives" | "Events" | "Marketing" | "Partnerships"
 
-export const teams: { name: Team; blurb: string }[] = [
-  { name: "Executives", blurb: "Run the club and keep everything on track." },
-  { name: "Events", blurb: "Plan the sessions, socials, comps and trips." },
-  { name: "Marketing", blurb: "Posts, photos and getting the word out." },
-  { name: "Partnerships", blurb: "Look after our sponsors and member perks." },
+export const teams: { name: Team }[] = [
+  { name: "Executives" },
+  { name: "Events" },
+  { name: "Marketing" },
+  { name: "Partnerships" },
 ]
 
 export type HoldType = "Jug" | "Crimp" | "Sloper" | "Pinch" | "Pocket"

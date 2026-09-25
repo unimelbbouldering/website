@@ -8,7 +8,7 @@ import { EventCarousel } from "@/components/shared/EventCarousel"
 import { ImageSlot } from "@/components/shared/ImageSlot"
 import { upcoming, useEventFilter } from "@/components/shared/useEventFilter"
 import {
-  about, club, committee, eventTypes, faqs, formatDate, joinSteps, memberPerks, sponsors, stats, teams,
+  about, club, committee, eventTypes, faqs, formatDate, heroImage, joinSteps, memberPerks, sponsors, stats, teams,
   type ClubEvent, type EventType, type SponsorTier, type Team,
 } from "@/content/site"
 import { pagePath } from "../registry"
@@ -104,42 +104,47 @@ function EventListing({ event }: { event: ClubEvent }) {
 
 /* ---------------------------------- Home --------------------------------- */
 
-const heroWords = ["Climb", "with", "us,", "every", "week."]
-
 export function Home() {
   return (
     <>
-      <section className="pt-8 pb-12 md:pt-14">
-        <h1 className={cn(display, "text-[clamp(3.25rem,11vw,9.5rem)] leading-[0.88]")} aria-label="Climb with us, every week.">
-          {heroWords.map((w, i) => (
-            <motion.span
-              key={i}
-              aria-hidden
-              className="mr-[0.22em] inline-block"
-              initial={{ opacity: 0, filter: "blur(14px)", y: "0.25em" }}
-              animate={{ opacity: 1, filter: "blur(0px)", y: 0, transitionEnd: { filter: "none" } }}
-              transition={{ delay: 0.15 + i * 0.09, duration: 0.8, ease }}
-            >
-              {w}
-            </motion.span>
-          ))}
-        </h1>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.75, duration: 0.6 }}
-          className="mt-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-end"
-        >
-          <p className="max-w-xl text-lg text-muted-foreground">{club.intro}</p>
-          <div className="flex flex-wrap gap-3">
+      {/* Full-bleed: breaks out of the page container to the window edges. */}
+      <section className="relative mx-[calc(50%-50vw)] mb-12 h-[max(34rem,min(42vw,calc(100svh-7rem)))] overflow-hidden">
+        <ImageSlot label={heroImage.alt} src={heroImage.src} contain className="absolute inset-0 size-full" />
+        <div aria-hidden className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 flex flex-col items-center justify-end px-5 pb-16 text-center md:pb-24">
+          <h1 className={cn(display, "max-w-4xl text-[clamp(1.75rem,4vw,3.5rem)] leading-[0.95] text-balance text-white")} aria-label={club.fullName}>
+            {club.fullName.split(" ").map((w, i) => (
+              <motion.span
+                key={i}
+                aria-hidden
+                className="mx-[0.11em] inline-block"
+                initial={{ opacity: 0, filter: "blur(14px)", y: "0.25em" }}
+                animate={{ opacity: 1, filter: "blur(0px)", y: 0, transitionEnd: { filter: "none" } }}
+                transition={{ delay: 0.15 + i * 0.09, duration: 0.8, ease }}
+              >
+                {w}
+              </motion.span>
+            ))}
+          </h1>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.75, duration: 0.6 }}
+            className="mt-8 flex flex-wrap justify-center gap-3"
+          >
             <Button asChild size="lg" className="h-11 rounded-sm px-5 text-base">
-              <Link to={to("join")}>Become a member</Link>
+              <Link to={to("join")}>Join the club</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="h-11 rounded-sm bg-transparent px-5 text-base">
-              <Link to={to("events")}>See what's on</Link>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-11 rounded-sm border-white/70 bg-transparent px-5 text-base text-white hover:bg-white hover:text-black"
+            >
+              <Link to={to("events")}>See events</Link>
             </Button>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       <section className="grid gap-3 md:grid-cols-[2fr_1fr] md:grid-rows-2">
@@ -298,7 +303,6 @@ export function Committee() {
             <section key={t.name} id={`team-${t.name.toLowerCase()}`} className="scroll-mt-24">
               <div className="mb-8 flex flex-wrap items-baseline justify-between gap-2 border-t-2 pt-4" style={{ borderColor: color.solid }}>
                 <h2 className={cn(display, "text-3xl")}>{t.name}</h2>
-                <p className="text-muted-foreground">{t.blurb}</p>
               </div>
               <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
                 {members.map((m) => (
