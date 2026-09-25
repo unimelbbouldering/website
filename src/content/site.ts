@@ -150,6 +150,7 @@ export const committee: CommitteeMember[] = [
 
   { name: "Gwen", role: "Marketing Director", team: "Marketing", hold: "Pinch", lead: true },
   ...officers("Marketing", [["Dennis", "Jug"], ["Angela", "Jug"], ["Dafflyn", "Crimp"]]),
+  { name: "Jorvan", role: "IT Officer", team: "Marketing", hold: "Sloper" },
 
   { name: "Teresa", role: "Partnerships Director", team: "Partnerships", hold: "Jug", lead: true },
   ...officers("Partnerships", [["Kit", "Pocket"], ["Bill", "Jug"], ["Bradley", "Sloper"]]),

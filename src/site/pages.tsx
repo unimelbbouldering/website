@@ -239,12 +239,12 @@ function MemberCard({ member, index, big }: { member: CommitteeMember; index: nu
         style={{ rotate: `${holdTilt(member.name)}deg` }}
         className={cn(
           "absolute left-1/2 z-10 -translate-x-1/2 drop-shadow-[0_2px_2px_rgba(26,26,46,0.3)]",
-          big ? "-top-8 size-16" : "-top-6 size-11",
+          big ? "-top-7 size-14" : "-top-6 size-11",
         )}
       />
       <ImageSlot label={member.name} className={cn("aspect-square", big ? "rounded-xl" : "rounded-lg")} />
       <div className="mt-4 px-1">
-        <h3 className={cn("font-bold", big ? "text-2xl" : "text-lg")}>{member.name}</h3>
+        <h3 className={cn("font-bold", big ? "text-xl" : "text-lg")}>{member.name}</h3>
         <p className={cn("text-sm", member.lead ? "font-semibold" : "text-muted-foreground")}>{member.role}</p>
         <p className="mt-2 text-sm">
           <span className="text-muted-foreground">Favourite hold:</span> {member.hold}
@@ -268,14 +268,27 @@ export function Committee() {
                 <Hold color={teamColor[t.name]} variant={ti} className="size-9" />
                 <h2 className={cn(heading, "text-3xl")}>{t.name}</h2>
               </div>
-              {/* Directors (and the president) take a 2×2 cell; every exec gets a bigger card. */}
-              <div className={cn("grid grid-cols-2 gap-x-6 gap-y-14", execs ? "md:grid-cols-4" : "sm:grid-cols-3 md:grid-cols-5")}>
-                {members.map((m, i) => (
-                  <div key={m.name} className={cn(m.lead && "col-span-2 row-span-2")}>
-                    <MemberCard member={m} index={i} big={execs || !!m.lead} />
-                  </div>
-                ))}
-              </div>
+              {execs ? (
+                // Execs share one bigger card size, three to a row, president first and the last row centred.
+                <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-x-6 gap-y-14">
+                  {members.map((m, i) => (
+                    <div key={m.name} className="basis-[calc(50%-12px)] md:basis-[calc((100%-48px)/3)]">
+                      <MemberCard member={m} index={i} big />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // Directors take a 2×2 cell, with the card inset so it isn't oversized.
+                <div className="grid grid-cols-2 gap-x-6 gap-y-14 sm:grid-cols-3 md:grid-cols-5">
+                  {members.map((m, i) => (
+                    <div key={m.name} className={cn(m.lead && "col-span-2 row-span-2")}>
+                      <div className={cn(m.lead && "mx-auto md:w-4/5")}>
+                        <MemberCard member={m} index={i} big={!!m.lead} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </section>
           )
         })}
