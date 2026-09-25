@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/shared/ContactForm"
 import { EventCarousel } from "@/components/shared/EventCarousel"
 import { ImageSlot } from "@/components/shared/ImageSlot"
-import { upcoming, useEventFilter } from "@/components/shared/useEventFilter"
+import { isPast, upcoming, useEventFilter } from "@/components/shared/useEventFilter"
 import {
   about, club, committee, eventTypes, faqs, formatDate, heroImage, joinSteps, memberPerks, sponsors, teams,
   type ClubEvent, type CommitteeMember, type Team,
@@ -32,7 +32,7 @@ function EventCard({ event }: { event: ClubEvent }) {
   return (
     <article className="relative flex h-full flex-col rounded-3xl border border-border bg-card p-3 pb-6 transition-shadow hover:shadow-[0_8px_30px_-12px_rgba(26,26,46,0.25)]">
       <span aria-hidden className="absolute -top-1.5 left-8 z-10 h-3 w-16 -rotate-3 rounded-[2px]" style={{ background: color }} />
-      <EventCarousel images={event.images} className="rounded-2xl" slideClassName="aspect-square" />
+      <EventCarousel images={event.images} className="rounded-2xl" slideClassName="aspect-[4/5]" />
       <div className="flex flex-1 flex-col px-3">
         <div className="mt-4 flex items-center justify-between gap-3 text-sm">
           <span className="font-semibold">{formatDate(event.date)}</span>
@@ -146,6 +146,9 @@ export function About() {
 
 export function Events() {
   const { filter, setFilter, visible } = useEventFilter()
+  const byDate = [...visible].sort((a, b) => a.date.localeCompare(b.date))
+  const soon = byDate.filter((e) => !isPast(e))
+  const past = byDate.filter(isPast).reverse()
   return (
     <>
       <PageHeader title="Events">Send them all</PageHeader>
@@ -178,9 +181,19 @@ export function Events() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.12 } }}
           transition={{ type: "spring", stiffness: 380, damping: 32 }}
-          className="grid gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          {visible.map((e) => <EventCard key={e.id} event={e} />)}
+          <div className="grid gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+            {soon.map((e) => <EventCard key={e.id} event={e} />)}
+          </div>
+          {soon.length === 0 && <p className="text-lg text-muted-foreground">Nothing coming up yet. Check back soon.</p>}
+          {past.length > 0 && (
+            <section className="mt-20">
+              <h2 className={cn(heading, "mb-8 text-3xl")}>Past events</h2>
+              <div className="grid gap-x-5 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
+                {past.map((e) => <EventCard key={e.id} event={e} />)}
+              </div>
+            </section>
+          )}
         </motion.div>
       </AnimatePresence>
     </>
@@ -280,10 +293,20 @@ export function Sponsors() {
       <div className="grid gap-5 md:grid-cols-3">
         {sponsors.map((s, i) => (
           <a key={s.name} href={s.url} className={cn("group rounded-3xl border border-border p-5 transition-colors hover:border-foreground/30", i === 0 && "md:col-span-2 md:row-span-2")}>
-            <ImageSlot label={`${s.name} logo`} className={cn("rounded-2xl", i === 0 ? "aspect-[16/9]" : "aspect-[5/3]")} />
+            <ImageSlot label={s.image ? s.name : `${s.name} logo`} src={s.image} className={cn("w-full rounded-2xl", i === 0 ? "aspect-[16/9]" : "aspect-[5/3]")} />
             <p className="mt-5 text-sm font-semibold" style={{ color: i === 0 ? "var(--tape-purple)" : undefined }}>{s.tier}</p>
             <h3 className={cn(heading, i === 0 ? "text-3xl" : "text-xl")}>{s.name}</h3>
             <p className="mt-1 text-muted-foreground">{s.perk}</p>
+            {s.perks && (
+              <ul className="mt-2 space-y-1.5">
+                {s.perks.map((p, j) => (
+                  <li key={p} className="flex items-center gap-3">
+                    <span className="size-2.5 shrink-0 rounded-full" style={{ background: tapeColors[j % tapeColors.length] }} />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            )}
           </a>
         ))}
       </div>
@@ -338,7 +361,6 @@ export function Contact() {
           {[
             { label: "Email", value: club.email, href: `mailto:${club.email}`, color: "var(--tape-blue)" },
             { label: "Instagram", value: club.instagram, href: club.instagramUrl, color: "var(--tape-pink)" },
-            { label: "Discord", value: "Join the server", href: club.discordUrl, color: "var(--tape-purple)" },
           ].map((d) => (
             <a key={d.label} href={d.href} className="flex items-center gap-4 rounded-2xl border border-border p-4 transition-colors hover:bg-muted">
               <span className="h-9 w-2 -rotate-6 rounded-[2px]" style={{ background: d.color }} />

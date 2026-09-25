@@ -34,9 +34,9 @@ export default function Layout() {
       <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
         <div className="mx-auto flex h-18 max-w-6xl items-center justify-between gap-4 px-5">
           <Wordmark />
-          <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+          <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
             {navPages.map((p) => (
-              <NavLink key={p.key} to={to(p.path)} className="relative px-3 py-2 text-[15px] font-medium">
+              <NavLink key={p.key} to={to(p.path)} end={p.path === ""} className="relative px-3 py-2 text-[15px] font-medium whitespace-nowrap">
                 {({ isActive }) => (
                   <>
                     <span className={cn("transition-colors", isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground")}>

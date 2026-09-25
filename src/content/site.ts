@@ -8,10 +8,9 @@ export const club = {
   tagline: "Climb with us, every week, whatever your grade.",
   intro:
     "We're the University of Melbourne's bouldering club. We run weekly social sessions, beginner nights, workshops and trips to real rock — open to every student, from first-timers to V8 crushers.",
-  email: "hello@unimelbbouldering.club",
+  email: "unimelbbouldering@gmail.com",
   instagram: "@unimelbbouldering",
-  instagramUrl: "https://instagram.com/",
-  discordUrl: "https://discord.com/",
+  instagramUrl: "https://www.instagram.com/unimelbbouldering/",
   // Point this at the UMSU club membership page once it exists.
   joinUrl: "https://umsu.unimelb.edu.au/buddy-up/clubs/",
   meetingPoint: "Parkville campus, Union House foyer",
@@ -50,6 +49,34 @@ function slides(title: string, count: number): EventImage[] {
 }
 
 export const events: ClubEvent[] = [
+  // Real events, from the club's Instagram posts.
+  {
+    id: "first-social-climb",
+    title: "First social climb",
+    type: "Social",
+    date: "2026-08-20",
+    time: "From 5:00 pm",
+    venue: "BlocHaus Bouldering",
+    suburb: "Port Melbourne",
+    blurb: "UMBS's first ever social climb. Meet new climbing friends, learn about the club and register interest in joining the committee. $17 entry for members (usually $24); shoe hire is $7 extra.",
+    images: [{ src: "/events/first-social-climb.jpg", alt: "Poster: UMBS's first ever social climb at BlocHaus Bouldering, Port Melbourne, Thursday 20 August, 5pm" }],
+    instagramUrl: "https://www.instagram.com/p/Db9bxYCS04A/",
+    membersOnly: true,
+  },
+  {
+    id: "week-8-social-climb",
+    title: "Week 8 social climb",
+    type: "Social",
+    date: "2026-09-18",
+    time: "From 7:00 pm",
+    venue: "UP Climbing",
+    suburb: "Balaclava",
+    blurb: "The whole gym to ourselves for a night of games, prizes and sends. No experience needed. $20 for members ($25 otherwise), with free chalk and shoe hire.",
+    images: [{ src: "/events/week-8-social-climb.jpg", alt: "Poster: UMBS week 8 social climb at UP Climbing, 24 William St, Balaclava, Friday 18 September, 7pm" }],
+    instagramUrl: "https://www.instagram.com/p/Dc-d2hpysz9/",
+  },
+
+  // Placeholder events.
   {
     id: "wednesday-social-1",
     title: "Wednesday social climb",
@@ -60,17 +87,6 @@ export const events: ClubEvent[] = [
     suburb: "Collingwood",
     blurb: "Our regular midweek session. Turn up, find the club table, and climb with whoever's there.",
     images: slides("Wednesday social climb", 3),
-  },
-  {
-    id: "first-timers-oct",
-    title: "First-timers night",
-    type: "Beginners",
-    date: "2026-10-03",
-    time: "5:30 – 7:30 pm",
-    venue: "Boulderlab",
-    suburb: "Brunswick",
-    blurb: "Never bouldered before? Shoes are included and a committee member will show you the basics.",
-    images: slides("First-timers night", 4),
   },
   {
     id: "footwork-workshop",
@@ -85,29 +101,6 @@ export const events: ClubEvent[] = [
     membersOnly: true,
   },
   {
-    id: "wednesday-social-2",
-    title: "Wednesday social climb",
-    type: "Social",
-    date: "2026-10-14",
-    time: "6:00 – 9:00 pm",
-    venue: "Urban Climb",
-    suburb: "Collingwood",
-    blurb: "Our regular midweek session. Turn up, find the club table, and climb with whoever's there.",
-    images: slides("Wednesday social climb", 3),
-  },
-  {
-    id: "grampians-trip",
-    title: "Grampians weekend",
-    type: "Outdoor",
-    date: "2026-10-24",
-    time: "Sat – Sun",
-    venue: "Gariwerd",
-    suburb: "Grampians National Park",
-    blurb: "Two days on sandstone with carpooling, crash pads and camping sorted. Limited spots.",
-    images: slides("Grampians weekend", 5),
-    membersOnly: true,
-  },
-  {
     id: "spring-comp",
     title: "Spring bouldering comp",
     type: "Comp",
@@ -117,17 +110,6 @@ export const events: ClubEvent[] = [
     suburb: "Brunswick",
     blurb: "A friendly in-house comp with beginner, intermediate and open categories. Prizes from our partners.",
     images: slides("Spring bouldering comp", 4),
-  },
-  {
-    id: "end-of-sem-social",
-    title: "End of semester social",
-    type: "Social",
-    date: "2026-11-18",
-    time: "6:00 pm onwards",
-    venue: "Boulderlab",
-    suburb: "Brunswick",
-    blurb: "One last session before exams wrap up, followed by dinner nearby.",
-    images: slides("End of semester social", 3),
   },
 ]
 
@@ -179,11 +161,20 @@ export type Sponsor = {
   name: string
   tier: SponsorTier
   perk: string
+  perks?: string[] // listed as bullet points under `perk`
+  image?: string
   url: string
 }
 
 export const sponsors: Sponsor[] = [
-  { name: "Partner gym", tier: "Major partner", perk: "Discounted entry for members every day of the week.", url: "#" },
+  {
+    name: "BlocHaus Bouldering",
+    tier: "Major partner",
+    perk: "Show your UMBS member code and student ID:",
+    perks: ["$17 entry ($7 off concession)", "20% off BlocHaus memberships"],
+    image: "/partners/blochaus.jpg",
+    url: "https://blochaus.com.au/",
+  },
   { name: "Climbing gear store", tier: "Partner", perk: "10% off shoes and chalk with your membership.", url: "#" },
   { name: "Physio clinic", tier: "Partner", perk: "Free finger and shoulder injury screening for members.", url: "#" },
   { name: "Local café", tier: "Supporter", perk: "Coffee discount after morning sessions.", url: "#" },
@@ -223,8 +214,9 @@ export const faqs = [
 
 export const about = {
   story: [
-    "UniMelb Bouldering started as a handful of students meeting at the same gym on Wednesday nights. It grew into a club because people kept bringing friends.",
-    "Today we're a community of students who climb together every week. Some of us train for comps, some of us just want an evening away from the library. Both are the point.",
+    "Unimelb BoulderSoc is the newly founded bouldering club at the University of Melbourne, established in 2026. Whether you're a complete beginner or a seasoned climber, we're building a community where students can climb, connect and challenge themselves together.",
+    "Our mission is to cultivate a supportive and inclusive community where students can build life-long connections and share their passion for bouldering. From casual social sessions to outdoor trips, comps and everything in between, this is your home for all things bouldering.",
+    "Memberships opened in August 2026, our first social climb was at BlocHaus Port Melbourne that same month, and BlocHaus became our first official partner in September. Non-UniMelb students are welcome too.",
   ],
   values: [
     { title: "Everyone starts somewhere", body: "Beginners are the heart of the club. Nobody is made to feel slow, weak or out of place." },
@@ -235,7 +227,7 @@ export const about = {
 
 export const joinSteps = [
   { title: "Sign up through UMSU", body: "Buy a membership on the UMSU clubs page using your student login." },
-  { title: "Join the group chat", body: "You'll get an invite to our Discord, where sessions and trips are announced first." },
+  { title: "Follow us on Instagram", body: "Social climbs, events and sign-up forms are announced on @unimelbbouldering first." },
   { title: "Come climbing", body: "Show your membership at any partner gym to get member pricing." },
 ]
 

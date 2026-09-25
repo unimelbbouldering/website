@@ -12,7 +12,7 @@ export const pageOrder: { key: PageKey; path: string; label: string }[] = [
 ]
 
 // Everything except Join, which the header renders as its own call to action.
-export const navPages = pageOrder.filter((p) => p.key !== "join" && p.key !== "home")
+export const navPages = pageOrder.filter((p) => p.key !== "join")
 
 export function pagePath(path: string) {
   return `/${path}`
