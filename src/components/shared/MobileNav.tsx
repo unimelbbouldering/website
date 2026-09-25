@@ -4,17 +4,15 @@ import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { club } from "@/content/site"
-import { navPages, pagePath, type DesignId } from "@/designs/registry"
+import { navPages, pagePath } from "@/site/routes"
 import { cn } from "@/lib/utils"
 
 export function MobileNav({
-  design,
   className,
   contentClassName,
   linkClassName,
   footer,
 }: {
-  design: DesignId
   className?: string
   contentClassName?: string
   linkClassName?: (active: boolean) => string
@@ -36,7 +34,7 @@ export function MobileNav({
           {links.map((l) => (
             <NavLink
               key={l.key}
-              to={pagePath(design, l.path)}
+              to={pagePath(l.path)}
               end={l.path === ""}
               onClick={() => setOpen(false)}
               className={({ isActive }) => cn("rounded-md px-3 py-2.5 text-lg", linkClassName?.(isActive))}

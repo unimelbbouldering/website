@@ -8,11 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy:chalk": "VERCEL_ORG_ID=team_yb2QAHkmDLUjlO9xtYNE8gco VERCEL_PROJECT_ID=prj_GKyXISn7oXLnaGhFjtIoX54VHkwu pnpm dlx vercel deploy --prod --yes",
-    "deploy:tape": "VERCEL_ORG_ID=team_yb2QAHkmDLUjlO9xtYNE8gco VERCEL_PROJECT_ID=prj_NuyELsWuOlL2RPUpzzQAylQFME6B pnpm dlx vercel deploy --prod --yes"
+    "deploy:prod": "VERCEL_ORG_ID=team_yb2QAHkmDLUjlO9xtYNE8gco VERCEL_PROJECT_ID=prj_NuyELsWuOlL2RPUpzzQAylQFME6B pnpm dlx vercel deploy --prod --yes"
   },
   "dependencies": {
-    "@fontsource-variable/archivo": "^5.3.0",
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",

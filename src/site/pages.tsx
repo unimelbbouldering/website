@@ -11,11 +11,11 @@ import {
   about, club, committee, eventTypes, faqs, formatDate, heroImage, joinSteps, memberPerks, sponsors, teams,
   type ClubEvent, type CommitteeMember, type Team,
 } from "@/content/site"
-import { pagePath } from "../registry"
+import { pagePath } from "./routes"
 import { cn } from "@/lib/utils"
 import { eventTape, Hold, TapeStrip, TypedHold } from "./Tape"
 
-const to = (path: string) => pagePath("tape", path)
+const to = pagePath
 const heading = "font-heading font-extrabold tracking-[-0.035em]"
 
 function PageHeader({ title, children }: { title: string; children?: ReactNode }) {

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, type Variants } from "motion/react"
-import { useLayoutEffect, useState } from "react"
+import { useState } from "react"
 import { useLocation, useOutlet } from "react-router"
 
 // Captures the route's element when the page mounts. Without this, the page that
@@ -30,14 +30,4 @@ export function AnimatedOutlet({ variants, className }: { variants: Variants; cl
       </motion.main>
     </AnimatePresence>
   )
-}
-
-// Sets the theme before the first paint so a design never flashes in another's colours.
-export function useDesignRoot(design: string) {
-  useLayoutEffect(() => {
-    document.documentElement.dataset.design = design
-    return () => {
-      delete document.documentElement.dataset.design
-    }
-  }, [design])
 }

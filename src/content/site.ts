@@ -23,12 +23,6 @@ export const heroImage = {
   alt: "Club members together at the bouldering gym",
 }
 
-export const stats = [
-  { value: "Weekly", label: "social sessions" },
-  { value: "V0–V10", label: "every grade welcome" },
-  { value: "$10", label: "a year to join" },
-]
-
 export type EventType = "Social" | "Beginners" | "Workshop" | "Outdoor" | "Comp"
 
 export const eventTypes: EventType[] = ["Social", "Comp", "Workshop"]

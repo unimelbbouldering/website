@@ -1,15 +1,14 @@
 import { motion } from "motion/react"
 import { Link, NavLink } from "react-router"
 import { Button } from "@/components/ui/button"
-import { AnimatedOutlet, useDesignRoot } from "@/components/shared/AnimatedOutlet"
-import { DesignSwitcher } from "@/components/shared/DesignSwitcher"
+import { AnimatedOutlet } from "@/components/shared/AnimatedOutlet"
 import { MobileNav } from "@/components/shared/MobileNav"
 import { club } from "@/content/site"
-import { navPages, pagePath } from "../registry"
+import { navPages, pagePath } from "./routes"
 import { cn } from "@/lib/utils"
 import { Hold } from "./Tape"
 
-const to = (path: string) => pagePath("tape", path)
+const to = pagePath
 
 const pageVariants = {
   initial: { opacity: 0, scale: 0.985 },
@@ -26,9 +25,7 @@ function Wordmark() {
   )
 }
 
-export default function TapeLayout() {
-  useDesignRoot("tape")
-
+export default function Layout() {
   return (
     <div className="min-h-svh overflow-x-clip">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:m-3 focus:rounded-lg focus:bg-muted focus:p-2">
@@ -62,7 +59,6 @@ export default function TapeLayout() {
               <Link to={to("join")}>Join us</Link>
             </Button>
             <MobileNav
-              design="tape"
               contentClassName="rounded-l-3xl"
               linkClassName={(a) => cn("font-semibold", a ? "bg-muted" : "text-muted-foreground")}
             />
@@ -94,7 +90,6 @@ export default function TapeLayout() {
           </nav>
         </div>
       </footer>
-      <DesignSwitcher />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/archivo/wdth.css";
 @import "@fontsource-variable/bricolage-grotesque";
 
 @custom-variant dark (&:is(.dark *));
@@ -49,36 +48,35 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Defaults, used by the design picker. Each design overrides these below. */
 :root {
-    --font-body: 'Archivo Variable', system-ui, sans-serif;
-    --font-display: 'Archivo Variable', system-ui, sans-serif;
-    --slot-bg: oklch(0.94 0 0);
-    --slot-fg: oklch(0.6 0 0);
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --font-body: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+    --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+    --slot-bg: #F3F3F6;
+    --slot-fg: #9A9AB0;
+    --background: #FFFFFF;
+    --foreground: #1A1A2E;
+    --card: #FFFFFF;
+    --card-foreground: #1A1A2E;
+    --popover: #FFFFFF;
+    --popover-foreground: #1A1A2E;
+    --primary: #1A1A2E;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F3F3F6;
+    --secondary-foreground: #1A1A2E;
+    --muted: #F3F3F6;
+    --muted-foreground: #5A5A70;
+    --accent: #F3F3F6;
+    --accent-foreground: #1A1A2E;
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    --border: #E4E4EC;
+    --input: #DADAE4;
+    --ring: #3A86FF;
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
+    --radius: 1.25rem;
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -87,6 +85,12 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    --tape-yellow: #FFD23F;
+    --tape-blue: #3A86FF;
+    --tape-pink: #FF4D8D;
+    --tape-green: #2EC4B6;
+    --tape-purple: #8338EC;
+    --tape-orange: #FF8B3D;
 }
 
 .dark {
@@ -136,73 +140,6 @@
   html {
     @apply font-sans;
     }
-}
-
-/* ---------- Design 1: Chalk ---------- */
-[data-design="chalk"] {
-    --font-body: 'Archivo Variable', system-ui, sans-serif;
-    --font-display: 'Archivo Variable', system-ui, sans-serif;
-    --background: #EEF0F1;
-    --foreground: #22262A;
-    --card: #F7F8F9;
-    --card-foreground: #22262A;
-    --popover: #F7F8F9;
-    --popover-foreground: #22262A;
-    --primary: #D6336C;
-    --primary-foreground: #FFFFFF;
-    --secondary: #E2E6E9;
-    --secondary-foreground: #22262A;
-    --muted: #E2E6E9;
-    --muted-foreground: #5E666E;
-    --accent: #E2E6E9;
-    --accent-foreground: #22262A;
-    --border: #D3D8DC;
-    --input: #C9CFD4;
-    --ring: #D6336C;
-    --radius: 0.25rem;
-    --slot-bg: #E2E6E9;
-    --slot-fg: #8C949B;
-    --hold: #D6336C;
-    /* Secondary route colours, used sparingly for categories and tints. */
-    --route-blue: #2F5DA8;
-    --route-amber: #C98A1B;
-    --route-teal: #1F8A7E;
-    --tint-pink: #F7E4EB;
-    --tint-blue: #E2E9F5;
-    --tint-amber: #F6EBD6;
-    --tint-teal: #DDEFEC;
-}
-
-/* ---------- Design 2: Tape ---------- */
-[data-design="tape"] {
-    --font-body: 'Bricolage Grotesque Variable', system-ui, sans-serif;
-    --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
-    --background: #FFFFFF;
-    --foreground: #1A1A2E;
-    --card: #FFFFFF;
-    --card-foreground: #1A1A2E;
-    --popover: #FFFFFF;
-    --popover-foreground: #1A1A2E;
-    --primary: #1A1A2E;
-    --primary-foreground: #FFFFFF;
-    --secondary: #F3F3F6;
-    --secondary-foreground: #1A1A2E;
-    --muted: #F3F3F6;
-    --muted-foreground: #5A5A70;
-    --accent: #F3F3F6;
-    --accent-foreground: #1A1A2E;
-    --border: #E4E4EC;
-    --input: #DADAE4;
-    --ring: #3A86FF;
-    --radius: 1.25rem;
-    --slot-bg: #F3F3F6;
-    --slot-fg: #9A9AB0;
-    --tape-yellow: #FFD23F;
-    --tape-blue: #3A86FF;
-    --tape-pink: #FF4D8D;
-    --tape-green: #2EC4B6;
-    --tape-purple: #8338EC;
-    --tape-orange: #FF8B3D;
 }
 
 @layer base {

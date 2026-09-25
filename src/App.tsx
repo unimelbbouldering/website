@@ -2,32 +2,13 @@ import type { ComponentType } from "react"
 import { MotionConfig } from "motion/react"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import chalk from "@/designs/chalk"
-import tape from "@/designs/tape"
-import { lockedDesign, pageOrder, type DesignId, type PageKey } from "@/designs/registry"
-import Picker from "@/pages/Picker"
+import Layout from "@/site/Layout"
+import * as pages from "@/site/pages"
+import { pageOrder, type PageKey } from "@/site/routes"
 
-type PageName = "Home" | "About" | "Events" | "Committee" | "Sponsors" | "Faq" | "Contact" | "Join"
-type DesignModule = { Layout: ComponentType; pages: Record<PageName, ComponentType> }
-
-const designModules: Record<DesignId, DesignModule> = { chalk, tape }
-
-const pageName: Record<PageKey, PageName> = {
-  home: "Home", about: "About", events: "Events", committee: "Committee",
-  sponsors: "Sponsors", faq: "Faq", contact: "Contact", join: "Join",
-}
-
-function designRoutes(id: DesignId, path: string) {
-  const { Layout, pages } = designModules[id]
-  return (
-    <Route key={id} path={path} element={<Layout />}>
-      {pageOrder.map((p) => {
-        const Page = pages[pageName[p.key]]
-        return p.path ? <Route key={p.key} path={p.path} element={<Page />} /> : <Route key={p.key} index element={<Page />} />
-      })}
-      <Route path="*" element={<Navigate to={path} replace />} />
-    </Route>
-  )
+const pageComponents: Record<PageKey, ComponentType> = {
+  home: pages.Home, about: pages.About, events: pages.Events, committee: pages.Committee,
+  sponsors: pages.Sponsors, faq: pages.Faq, contact: pages.Contact, join: pages.Join,
 }
 
 export default function App() {
@@ -36,15 +17,13 @@ export default function App() {
       <TooltipProvider>
         <BrowserRouter>
           <Routes>
-            {lockedDesign ? (
-              designRoutes(lockedDesign, "/")
-            ) : (
-              <>
-                <Route index element={<Picker />} />
-                {(Object.keys(designModules) as DesignId[]).map((id) => designRoutes(id, `/${id}`))}
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </>
-            )}
+            <Route path="/" element={<Layout />}>
+              {pageOrder.map((p) => {
+                const Page = pageComponents[p.key]
+                return p.path ? <Route key={p.key} path={p.path} element={<Page />} /> : <Route key={p.key} index element={<Page />} />
+              })}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
