@@ -35,6 +35,12 @@ export const designs: { id: DesignId; name: string; summary: string; swatches: s
   },
 ]
 
+// Set VITE_DESIGN at build time to ship a single design at the site root,
+// without the picker or switcher. Unset, every design is served under /<id>.
+const envDesign = import.meta.env.VITE_DESIGN as string | undefined
+export const lockedDesign = designs.find((d) => d.id === envDesign)?.id
+
 export function pagePath(design: DesignId, path: string) {
-  return path ? `/${design}/${path}` : `/${design}`
+  const base = lockedDesign ? "" : `/${design}`
+  return path ? `${base}/${path}` : base || "/"
 }

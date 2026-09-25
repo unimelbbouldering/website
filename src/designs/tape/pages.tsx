@@ -148,7 +148,7 @@ export function Events() {
   const { filter, setFilter, visible } = useEventFilter()
   return (
     <>
-      <PageHeader title="Events">Pick a colour. Send it.</PageHeader>
+      <PageHeader title="Events">Send them all</PageHeader>
       <div role="group" aria-label="Filter events" className="mb-10 flex flex-wrap gap-2">
         {(["All", ...eventTypes] as const).map((o) => {
           const active = filter === o
@@ -244,7 +244,7 @@ function MemberCard({ member, index, big }: { member: CommitteeMember; index: nu
 export function Committee() {
   return (
     <>
-      <PageHeader title="Our team">Ask any of them for beta. They'll pretend to know.</PageHeader>
+      <PageHeader title="Our team">Ask them for beta (T&C Applies)</PageHeader>
       <div className="space-y-24">
         {teams.map((t, ti) => {
           const members = committee.filter((m) => m.team === t.name)
@@ -332,7 +332,7 @@ export function Faq() {
 export function Contact() {
   return (
     <>
-      <PageHeader title="Contact">Slide into our DMs, or use the form.</PageHeader>
+      <PageHeader title="Contact" />
       <div className="grid gap-8 md:grid-cols-[1fr_1.4fr]">
         <div className="grid content-start gap-3">
           {[

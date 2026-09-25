@@ -2,7 +2,7 @@ import { useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { Link, useLocation } from "react-router"
 import { Layers, X } from "lucide-react"
-import { designs } from "@/designs/registry"
+import { designs, lockedDesign } from "@/designs/registry"
 import { cn } from "@/lib/utils"
 
 // Preview-only control for comparing the four directions on the same page.
@@ -11,6 +11,8 @@ export function DesignSwitcher() {
   const { pathname } = useLocation()
   const [, current, ...rest] = pathname.split("/")
   const sub = rest.join("/")
+
+  if (lockedDesign) return null
 
   return (
     <div className="fixed bottom-4 left-4 z-50 font-[system-ui] text-sm">
